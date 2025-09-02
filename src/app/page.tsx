@@ -1,7 +1,7 @@
 import FeaturedProducts from '@/components/FeaturedProducts';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import Image from 'next/image';
+import ValueProposition from '@/components/ValueProposition';
 
 export default function Home() {
 	return (
@@ -9,6 +9,7 @@ export default function Home() {
 			<Header />
 			<Hero />
 			<FeaturedProducts />
+			<ValueProposition />
 		</main>
 	);
 }

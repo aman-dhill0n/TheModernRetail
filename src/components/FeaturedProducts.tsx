@@ -1,51 +1,71 @@
 import React from 'react';
 import ProductCard from './ProductCard';
 
-// In a real application, this data would come from an API or CMS
-const products = [
-	{
-		id: 1,
-		name: 'The Essential Crewneck',
-		price: '$29.99',
-		imageUrl: '/images/product-1.jpg',
-	},
-	{
-		id: 2,
-		name: 'Classic Leather Sneaker',
-		price: '$99.99',
-		imageUrl: '/images/product-2.jpg',
-	},
-	{
-		id: 3,
-		name: 'Minimalist Timepiece',
-		price: '$299.99',
-		imageUrl: '/images/product-3.jpg',
-	},
-	{
-		id: 4,
-		name: 'Canvas Utility Tote',
-		price: '$69.99',
-		imageUrl: '/images/product-5.jpg',
-	},
-];
+type WpProduct = {
+	id: number;
+	title: {
+		rendered: string;
+	};
+	acf: {
+		price: string;
+		product_image: string;
+	};
+};
 
-export default function FeaturedProducts() {
+async function getProducts() {
+	try {
+		const res = await fetch(
+			'http://the-modern-retail.local/wp-json/wp/v2/products',
+			{
+				next: { revalidate: 10 },
+			}
+		);
+		if (!res.ok) throw new Error('Failed to fetch data');
+		const products: WpProduct[] = await res.json();
+		return products;
+	} catch (error) {
+		console.error('Error fetching products:', error);
+		return [];
+	}
+}
+
+export default async function FeaturedProducts() {
+	const products = await getProducts();
+
+	if (products.length === 0) {
+		return (
+			<section className='bg-gray-50 py-16 px-4 text-center'>
+				<h2 className='text-3xl font-bold text-gray-900'>Featured Products</h2>
+				<p className='mt-4 text-lg text-gray-600'>
+					Could not load products at this time.
+				</p>
+			</section>
+		);
+	}
+
+	// First, filter out products that don't have an image, THEN map the rest.
+	const formattedProducts = products
+		.filter((product) => product.acf.product_image) // <-- THIS IS THE NEW LINE
+		.map((product) => ({
+			id: product.id,
+			name: product.title.rendered,
+			price: product.acf.price,
+			imageUrl: product.acf.product_image,
+		}));
+
 	return (
 		<section className='bg-gray-50 py-16 px-4 sm:px-6 lg:px-8'>
 			<div className='container mx-auto'>
-				{/* Section Header */}
 				<div className='text-center mb-12'>
 					<h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-						This Season&apos;s Must-Haves
+						This Seasons Must-Haves
 					</h2>
 					<p className='mt-4 text-lg text-gray-600'>
 						Discover pieces designed for your wardrobe, crafted with purpose.
 					</p>
 				</div>
-
-				{/* Products Grid */}
 				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>
-					{products.map((product) => (
+					{formattedProducts.map((product) => (
 						<ProductCard
 							key={product.id}
 							name={product.name}

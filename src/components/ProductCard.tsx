@@ -24,6 +24,7 @@ export default function ProductCard({
 					src={imageUrl}
 					alt={name}
 					fill
+					sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw' // Add this line
 					style={{ objectFit: 'cover' }}
 					className='group-hover:scale-105 transition-transform duration-300 ease-in-out'
 				/>

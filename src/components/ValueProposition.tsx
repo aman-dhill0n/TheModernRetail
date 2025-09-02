@@ -12,6 +12,7 @@ export default function ValueProposition() {
 							src='/images/value-prop-image.jpg'
 							alt='A person thoughtfully considering fabric swatches'
 							fill
+							sizes='(max-width: 768px) 100vw, 50vw' // Add this line
 							style={{ objectFit: 'cover' }}
 						/>
 					</div>

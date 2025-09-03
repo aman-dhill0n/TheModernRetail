@@ -5,15 +5,15 @@ export default function Header() {
 		<header className='bg-white shadow-md'>
 			<nav className='container mx-auto px-6 py-4 flex justify-between items-center'>
 				{/* Logo */}
-				<div className='text-xl font-bold text-gray-800'>The Modern Retail</div>
+				<div className='text-xl font-bold text-red-700'>AMAAR</div>
 
 				{/* Navigation Links */}
 				<div className='hidden md:flex space-x-6'>
 					<a href='#' className='text-gray-600 hover:text-gray-800'>
-						New Arrivals
+						Handbags
 					</a>
 					<a href='#' className='text-gray-600 hover:text-gray-800'>
-						Collections
+						Kurtis
 					</a>
 					<a href='#' className='text-gray-600 hover:text-gray-800'>
 						Sale

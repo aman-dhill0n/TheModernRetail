@@ -14,6 +14,7 @@ export default function ValueProposition() {
 							fill
 							sizes='(max-width: 768px) 100vw, 50vw' // Add this line
 							style={{ objectFit: 'cover' }}
+							priority
 						/>
 					</div>
 

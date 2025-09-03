@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: 'The Modern Retail',
+	title: 'AMAAR',
 	description: 'Modern Retail E-Commerce with Next.js',
 };
 

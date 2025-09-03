@@ -23,6 +23,12 @@ const testimonials = [
 		author: 'Jessica P.',
 		role: 'First-Time Buyer',
 	},
+	{
+		id: 4,
+		quote: 'The best place to shop!!!!',
+		author: 'John Doe',
+		role: 'Alcoholic Shopper',
+	},
 ];
 
 export default function Testimonials() {
@@ -37,7 +43,7 @@ export default function Testimonials() {
 				</div>
 
 				{/* Testimonials Grid */}
-				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
 					{testimonials.map((testimonial) => (
 						<TestimonialCard
 							key={testimonial.id}
